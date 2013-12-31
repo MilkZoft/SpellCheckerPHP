@@ -1,9 +1,11 @@
 <?php
 /**
  * Project: Spell Checker PHP
- * Version: 1.0
+ * Version: 1.0.1
  * Author: www.codejobs.biz
  */
+
+include "config.php";
 
 if (!function_exists("spellChecker")) {
 	function spellChecker($text) 
@@ -20,9 +22,9 @@ if (!function_exists("spellChecker")) {
 }
 
 if (!function_exists("fixOrthography")) {
-	function fixOrthography($text, $language = "spanish") 
+	function fixOrthography($text) 
 	{
-		$words = include "dictionaries/$language.php";
+		$words = include SCPHP_DICTIONARIES_PATH . SCPHP_LANGUAGE .".php";
 			
 		return preg_replace(array_keys($words), array_values($words), $text);
 	}
