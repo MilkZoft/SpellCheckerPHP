@@ -1,10 +1,11 @@
 <?php
 /**
- * Project: PHP Fixing Spelling
- * Créditos: www.codejobs.biz
+ * Project: Spell Checker PHP
+ * Version: 1.0
+ * Author: www.codejobs.biz
  */
 
-if(!function_exists("fixSpelling")) {
+if(!function_exists("spellChecker")) {
 	function spellChecker($text) 
 	{		
 		$text = fixOrthography($text);
