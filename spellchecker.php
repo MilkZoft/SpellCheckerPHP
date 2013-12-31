@@ -5,7 +5,7 @@
  * Author: www.codejobs.biz
  */
 
-if(!function_exists("spellChecker")) {
+if (!function_exists("spellChecker")) {
 	function spellChecker($text) 
 	{		
 		$text = fixOrthography($text);
