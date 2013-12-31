@@ -87,7 +87,6 @@ return array(
 	"/\bcache\b/" => "caché",
 	"/\bcaligrafia\b/" => "caligrafía",
 	"/\bcambiaran\b/" => "cambiarán",
-	"/\bcambiocomo\b/" => "cambiocómo",
 	"/\bcambio\b/" => "cambió",
 	"/\bcamino\b/" => "caminó",
 	"/\bcancion\b/" => "canción",
