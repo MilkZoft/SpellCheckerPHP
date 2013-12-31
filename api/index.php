@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST["text"]) and strlen($_POST["text"]) > 10) {
 	if (isset($_POST["language"]) and $_POST["language"] == "english") {
-		$language = "spanish";
+		$language = "spanish"; // This will change once we create the english dictionary.
 	} else {
 		$language = "spanish";
 	}
