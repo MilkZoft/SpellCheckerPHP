@@ -804,7 +804,6 @@ return array(
 	"/\bveras\b/" => "verás",
 	"/\bveia\b/" => "veía",
 	"/\bveian\b/" => "veían",
-	"/\bvida tu\b/" => "vidatú",
 	"/\bvirtualizacion\b/" => "virtualización",
 	"/\bvision\b/" => "visión",
 	"/\bvivi\b/" => "viví",
