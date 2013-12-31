@@ -8,9 +8,9 @@
 include "config.php";
 
 if (!function_exists("spellChecker")) {
-	function spellChecker($text) 
+	function spellChecker($text, $language = SCPHP_LANGUAGE) 
 	{		
-		$text = fixOrthography($text);
+		$text = fixOrthography($text, $language);
 		$text = fixSpaces($text);		
 		$text = fixParenthesis($text);
 		$text = fixPoints($text);
@@ -22,9 +22,9 @@ if (!function_exists("spellChecker")) {
 }
 
 if (!function_exists("fixOrthography")) {
-	function fixOrthography($text) 
+	function fixOrthography($text, $language) 
 	{
-		$words = include SCPHP_DICTIONARIES_PATH . SCPHP_LANGUAGE .".php";
+		$words = include SCPHP_DICTIONARIES_PATH . $language .".php";
 			
 		return preg_replace(array_keys($words), array_values($words), $text);
 	}
