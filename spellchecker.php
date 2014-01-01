@@ -51,7 +51,7 @@ if (!function_exists("suggestWords")) {
 				}
 			}
 	
-			$jsonFile = SCPHP_PATH . SCPHP_DIRECTORY_SEPARATOR . SCPHP_DICTIONARIES_PATH . $language ."_suggested.json";
+			$jsonFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_suggested.json";
 			$jsonContent = file_get_contents($jsonFile);
 			$alreadySuggestedWords = (array) json_decode($jsonContent, true);			
 
