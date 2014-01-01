@@ -1,6 +1,6 @@
 <?php
-if (isset($_POST["text"]) and strlen($_POST["text"]) > 10) {
-	if (isset($_POST["language"]) and $_POST["language"] == "english") {
+if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 10) {
+	if (isset($_REQUEST["language"]) and $_REQUEST["language"] == "english") {
 		$language = "spanish"; // This will change once we create the english dictionary.
 	} else {
 		$language = "spanish";
@@ -8,18 +8,18 @@ if (isset($_POST["text"]) and strlen($_POST["text"]) > 10) {
 
 	include "../spellchecker.php";
 
-	suggestWords($_POST["text"], $language);
+	suggestWords($_REQUEST["text"], $language);
 
-	$text = spellChecker($_POST["text"], $language);
+	$text = spellChecker($_REQUEST["text"], $language);
 
-	if (isset($_POST["type"]) and $_POST["type"] == "json") {
+	if (isset($_REQUEST["type"]) and $_REQUEST["type"] == "json") {
 		echo json_encode(
 			array(
 				"spellchecker" => array(
 					"text" => $text
 				)
 			));
-	} elseif (isset($_POST["type"]) and $_POST["type"] == "xml") {
+	} elseif (isset($_REQUEST["type"]) and $_REQUEST["type"] == "xml") {
 		header("Content-type: text/xml; charset=utf-8");
 
 		echo '<?xml version="1.0"?>
@@ -32,21 +32,21 @@ if (isset($_POST["text"]) and strlen($_POST["text"]) > 10) {
 		echo $text;
 	}
 } else {
-	if (isset($_POST["type"]) and $_POST["type"] == "json") {
+	if (isset($_REQUEST["type"]) and $_REQUEST["type"] == "json") {
 		echo json_encode(
 			array(
 				"spellchecker" => array(
 					"error" => 'Error: The length of the text is too short.'
 				)
 			));
-	} elseif (isset($_POST["type"]) and $_POST["type"] == "xml") {
+	} elseif (isset($_REQUEST["type"]) and $_REQUEST["type"] == "xml") {
 		header("Content-type: text/xml; charset=utf-8");
 
 		echo '<?xml version="1.0"?>
 		<spellchecker>
 			<error>Error: The length of the text is too short.</error>
 		</spellchecker>';
-	} elseif (isset($_POST["text"])) {
+	} elseif (isset($_REQUEST["text"])) {
 		header("Content-Type: text/html; charset=UTF-8");
 
 		echo 'Error: The length of the text is too short.';
