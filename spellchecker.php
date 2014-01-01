@@ -14,7 +14,6 @@ if (!function_exists("spellChecker")) {
 		$text = fixSpaces($text);		
 		$text = fixParenthesis($text);
 		$text = fixPoints($text);
-		$text = fixImagesAttributes($text);
 		$text = fixTags($text);
 
 		return $text;
@@ -130,15 +129,9 @@ if (!function_exists("fixTags")) {
 		$text = str_replace(' </strong> ', "</strong>", $text);
 		$text = str_replace('<h3><strong>', "<h3>", $text);
 		$text = str_replace('</strong></h3>', "</h3>", $text);
+		$text = str_replace("<div>&nbsp;</div>", '<div style="page-break-after: always;"><span style="display: none;">&nbsp;</span></div>', $text);
 		
 		return $text;
-	}
-}
-
-if (!function_exists("fixImagesAttributes")) {
-	function fixImagesAttributes($text) 
-	{			
-		return preg_replace("/<([a-z][a-z0-9]*)(?:[^>]*(\ssrc=['\"][^'\"]*['\"]))?[^>]*?(\/?)>/i", '<$1$2$3>', $text);
 	}
 }
 
