@@ -57,7 +57,7 @@ if (!function_exists("suggestWords")) {
 
 			$jsonContent = json_encode(array_merge($alreadySuggestedWords, $suggestedWords));
 			
-			file_put_contents($jsonFile, $jsonContent);
+			file_put_contents($jsonFile, $jsonContent, FILE_APPEND | LOCK_EX);
 		}
 	}
 }
