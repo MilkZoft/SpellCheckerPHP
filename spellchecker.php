@@ -52,7 +52,7 @@ if (!function_exists("suggestWords")) {
 			}
 	
 			$jsonFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_suggested.json";
-			$jsonContent = file_get_contents($jsonFile);
+			$jsonContent = !file_exists($jsonFile) ? null : file_get_contents($jsonFile);
 			$alreadySuggestedWords = (array) json_decode($jsonContent, true);			
 
 			$jsonContent = json_encode(array_merge($alreadySuggestedWords, $suggestedWords));
