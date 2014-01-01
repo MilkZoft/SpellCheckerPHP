@@ -54,7 +54,7 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 10) {
 		echo '
 			<h2>How to use it</h2>
 
-			<p>You must send a POST request to http://spellcheckerphp.com/api/ with the follow variables:</p>
+			<p>You must send a POST or GET request to http://spellcheckerphp.com/api/ with the follow variables:</p>
 
 			<ul>
 				<li><strong>text (mandatory):</strong> Here you will send the content that you want to fix the spelling (must be more than 10 characters).</li>
