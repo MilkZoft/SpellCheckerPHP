@@ -8,11 +8,15 @@ if (isset($_POST["text"]) and strlen($_POST["text"]) > 10) {
 
 	include "../spellchecker.php";
 
+	suggestWords($_POST["text"], $language);
+
+	$text = spellChecker($_POST["text"], $language);
+
 	if (isset($_POST["type"]) and $_POST["type"] == "json") {
 		echo json_encode(
 			array(
 				"spellchecker" => array(
-					"text" => spellChecker($_POST["text"], $language)
+					"text" => $text
 				)
 			));
 	} elseif (isset($_POST["type"]) and $_POST["type"] == "xml") {
@@ -20,12 +24,12 @@ if (isset($_POST["text"]) and strlen($_POST["text"]) > 10) {
 
 		echo '<?xml version="1.0"?>
 		<spellchecker>
-			<text>'. spellChecker($_POST["text"], $language) .'</text>
+			<text>'. $text .'</text>
 		</spellchecker>';
 	} else {
 		header("Content-Type: text/html; charset=UTF-8");
 
-		echo spellChecker($_POST["text"], $language);
+		echo $text;
 	}
 } else {
 	if (isset($_POST["type"]) and $_POST["type"] == "json") {

@@ -21,6 +21,47 @@ if (!function_exists("spellChecker")) {
 	}
 }
 
+if (!function_exists("stripAccents")) {
+	function stripAccents($string) 
+	{ 
+		$characters = array(
+            "Á" => "A", "Ç" => "c", "É" => "e", "Í" => "i", "Ñ" => "n", "Ó" => "o", "Ú" => "u", "á" => "a", "ç" => "c", 
+            "é" => "e", "í" => "i", "ñ" => "n", "ó" => "o", "ú" => "u", "à" => "a", "è" => "e", "ì" => "i", "ò" => "o", 
+            "ù" => "u", "ã" => "a", "¿" => "", "?" =>  "", "¡" =>  "", "!" =>  "", ": " => "-"
+        );                
+                
+        return strtr($string, $characters); 
+	}
+}
+
+if (!function_exists("suggestWords")) {
+	function suggestWords($text, $language = SCPHP_LANGUAGE)
+	{
+		$pattern = '/([a-zA-Z]*[ÁÉÍÓÚáéíóú][a-zA-Z]*)/';
+
+		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
+		
+		$count = count($matches);		
+
+		if ($count > 0) {
+			for ($i = 0; $i < $count; $i++) {
+				if (isset($matches[$i][0]) and isset($matches[$i + 1][0])) {
+					$suggestedWords[stripAccents($matches[$i][0] . $matches[$i + 1][0])] = $matches[$i][0] . $matches[$i + 1][0];
+					$i++;
+				}
+			}
+	
+			$jsonFile = SCPHP_PATH . SCPHP_DIRECTORY_SEPARATOR . SCPHP_DICTIONARIES_PATH . $language ."_suggested.json";
+			$jsonContent = file_get_contents($jsonFile);
+			$alreadySuggestedWords = (array) json_decode($jsonContent, true);			
+
+			$jsonContent = json_encode(array_merge($alreadySuggestedWords, $suggestedWords));
+			
+			file_put_contents($jsonFile, $jsonContent);
+		}
+	}
+}
+
 if (!function_exists("fixOrthography")) {
 	function fixOrthography($text, $language) 
 	{
