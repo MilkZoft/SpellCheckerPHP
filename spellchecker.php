@@ -121,7 +121,6 @@ if (!function_exists("fixPoints")) {
 if (!function_exists("fixTags")) {
 	function fixTags($text, $tag = "span") 
 	{
-		$text = preg_replace("/<". $tag ."[^>]+\>/i", "", $text);
 		$text = str_replace("<span>", "", $text);
 		$text = str_replace("</span>", "", $text);
 		$text = str_replace('<p>&nbsp;</p>', "", $text);
