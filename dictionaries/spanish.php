@@ -293,7 +293,6 @@ return array(
 	"/\bestas\b/" => "estás",
 	"/\bestatico\b/" => "estático",
 	"/\bestaticos\b/" => "estáticos",
-	"/\beste\b/" => "esté",
 	"/\besten\b/" => "estén",
 	"/\besteriles\b/" => "estériles",
 	"/\bestes\b/" => "estés",
