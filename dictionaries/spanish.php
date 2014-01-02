@@ -817,7 +817,9 @@ return array(
 
 	// Misspelled words
 	"/\bke\b/" => "que",
-	"/\bmaz\b/i" => "más",
-	"/\bprueva\b/i" => "prueba",
+	"/\bmaz\b/" => "más",
+	"/\bMaz\b/" => "Más",
+	"/\bprueva\b/" => "prueba",
+	"/\bPrueva\b/" => "Prueba",
 	
 );
