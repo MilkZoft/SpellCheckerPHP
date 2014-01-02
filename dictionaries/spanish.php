@@ -816,6 +816,8 @@ return array(
 	"/\bvinculos\b/" => "vínculos",
 
 	// Misspelled words
-	"/\bprueva\b/" => "prueba",
-	"/\bmaz\b/" => "más",
+	"/\bke\b/" => "que",
+	"/\bmaz\b/i" => "más",
+	"/\bprueva\b/i" => "prueba",
+	
 );
