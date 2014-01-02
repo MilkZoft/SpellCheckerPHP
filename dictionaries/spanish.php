@@ -1,5 +1,6 @@
 <?php
 return array(
+	// Acents mistakes
 	"/\babandonara\b/" => "abandonará",
 	"/\babstraccion\b/" => "abstracción",
 	"/\babtraccion\b/" => "abstracción",
@@ -814,4 +815,8 @@ return array(
 	"/\bvideo\b/" => "vídeo",
 	"/\bvinculo\b/" => "vínculo",
 	"/\bvinculos\b/" => "vínculos",
+
+	// Misspelled words
+	"/\bprueva\b/" => "prueba",
+	"/\bmaz\b/" => "más",
 );

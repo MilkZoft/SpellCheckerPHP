@@ -1,5 +1,5 @@
 <?php
-if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 10) {
+if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 	if (isset($_REQUEST["language"]) and $_REQUEST["language"] == "english") {
 		$language = "spanish"; // This will change once we create the english dictionary.
 	} else {
