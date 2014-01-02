@@ -1681,6 +1681,8 @@ return array(
 	"/\bmaz\b/" => "más", 
 	"/\bPrueva\b/" => "Prueba", 
 	"/\bprueva\b/" => "prueba",
+	"/\bVuenos\b/" => "Buenos", 
+	"/\bvuenos\b/" => "buenos",
 
 	// Names & Surnames
 	"/\bCalderon\b/" => "Calderón", 
@@ -1693,8 +1695,8 @@ return array(
 
 	// Countries
 	"/\bbrasil\b/" => "Brasil",
+	"/\bBrazil\b/" => "Brasil",
 	"/\bbrazil\b/" => "Brasil",
-
 	"/\bMexico\b/" => "México",
 	"/\bmexico\b/" => "México",
 	"/\bMejico\b/" => "México",
