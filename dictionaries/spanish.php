@@ -1677,6 +1677,8 @@ return array(
 	// Misspelled words
 	"/\bKe\b/" => "Que", 
 	"/\bke\b/" => "que", 
+	"/\bLlendo\b/" => "Yendo", 
+	"/\bllendo\b/" => "yendo", 
 	"/\bMaz\b/" => "Más", 
 	"/\bmaz\b/" => "más", 
 	"/\bPrueva\b/" => "Prueba", 
