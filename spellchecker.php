@@ -24,21 +24,21 @@ if (!function_exists("spellChecker")) {
 if (!function_exists("fixCaps")) {
 	function fixCaps($text) 
 	{ 
-		$parts = explode(" ", $text);
+		$words = explode(" ", $text);
 		
-		if (count($parts) >= 3) {
-			if (strlen($parts[0]) > 3) {
-				$word = $parts[0];
-			} elseif (strlen($parts[1]) > 3) {
-				$word = $parts[1];
+		if (count($words) >= 3) {
+			if (strlen($words[0]) > 3) {
+				$word = $words[0];
+			} elseif (strlen($words[1]) > 3) {
+				$word = $words[1];
 			} else {
-				$word = $parts[2];
+				$word = $words[2];
 			}			
 		} else {
-			if (strlen($parts[0]) > 3) {
-				$word = $parts[0];
+			if (strlen($words[0]) > 3) {
+				$word = $words[0];
 			} else {
-				$word = $parts[1];
+				$word = $words[1];
 			}			
 		}
 
