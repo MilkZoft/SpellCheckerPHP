@@ -47,7 +47,7 @@ if (!function_exists("stripAccents")) {
 if (!function_exists("suggestWords")) {
 	function suggestWords($text, $language = SCPHP_LANGUAGE)
 	{
-		$pattern = '/([a-zA-Z]*[ÁÉÍÓÚáéíóú][a-zA-Z]*)/';
+		$pattern = '/([a-zA-Z]*[ÁÉÍÓÚÑáéíóúñ][a-zA-Z]*)/';
 
 		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
 		
