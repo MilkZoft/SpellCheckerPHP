@@ -4,36 +4,42 @@ if (isset($_REQUEST["benchmark"])) {
 }
 
 if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
-	if (isset($_REQUEST["language"]) and $_REQUEST["language"] == "english") {
-		$language = "spanish"; // This will change once we create the english dictionary.
-	} else {
-		$language = "spanish";
-	}
-
-	include "../spellchecker.php";
-
-	suggestWords($_REQUEST["text"], $language);
-
-	$text = spellChecker($_REQUEST["text"], $language);
-
-	if (isset($_REQUEST["type"]) and $_REQUEST["type"] == "json") {
-		echo json_encode(
-			array(
-				"spellchecker" => array(
-					"text" => $text
-				)
-			));
-	} elseif (isset($_REQUEST["type"]) and $_REQUEST["type"] == "xml") {
-		header("Content-type: text/xml; charset=utf-8");
-
-		echo '<?xml version="1.0"?>
-		<spellchecker>
-			<text>'. $text .'</text>
-		</spellchecker>';
-	} else {
+	if (strpos($_REQUEST["text"], " ") === false) {
 		header("Content-Type: text/html; charset=UTF-8");
 
-		echo $text;
+		echo 'Error: You need to write a sentence not only a single word.';
+	} else {
+		if (isset($_REQUEST["language"]) and $_REQUEST["language"] == "english") {
+			$language = "spanish"; // This will change once we create the english dictionary.
+		} else {
+			$language = "spanish";
+		}
+
+		include "../spellchecker.php";
+
+		suggestWords($_REQUEST["text"], $language);
+
+		$text = spellChecker($_REQUEST["text"], $language);
+
+		if (isset($_REQUEST["type"]) and $_REQUEST["type"] == "json") {
+			echo json_encode(
+				array(
+					"spellchecker" => array(
+						"text" => $text
+					)
+				));
+		} elseif (isset($_REQUEST["type"]) and $_REQUEST["type"] == "xml") {
+			header("Content-type: text/xml; charset=utf-8");
+
+			echo '<?xml version="1.0"?>
+			<spellchecker>
+				<text>'. $text .'</text>
+			</spellchecker>';
+		} else {
+			header("Content-Type: text/html; charset=UTF-8");
+
+			echo $text;
+		}
 	}
 } else {
 	if (isset($_REQUEST["type"]) and $_REQUEST["type"] == "json") {
