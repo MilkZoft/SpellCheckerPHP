@@ -97,6 +97,8 @@ if (!function_exists("fixSpaces")) {
 if (!function_exists("fixPoints")) {
 	function fixPoints($text)
 	{
+		$text{0} = strtoupper($text{0});
+		
 		$pattern = '/\.\w+ /i';
 
 		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
