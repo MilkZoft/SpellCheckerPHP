@@ -1,4 +1,9 @@
 <?php
+if (isset($_REQUEST["benchmark"])) {
+	ob_start();
+    $time = microtime(true);
+}
+
 if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 	if (isset($_REQUEST["language"]) and $_REQUEST["language"] == "english") {
 		$language = "spanish"; // This will change once we create the english dictionary.
@@ -67,4 +72,9 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 			<p>Powered by <a href="http://www.codejobs.biz" target="_blank">www.codejobs.biz</h3></p>
 		';
 	}
+}
+
+if (isset($_REQUEST["benchmark"])) {
+	echo '<p><strong>Benchmark:</strong> '. microtime(true) - $time .'</p>';
+    ob_end_clean();
 }
