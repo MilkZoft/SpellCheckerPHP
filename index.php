@@ -27,13 +27,13 @@ header("Content-Type: text/html; charset=UTF-8");
 
 		<form action="/api" method="post">
 			<h3>Text a corregir</h3>
-			
+
 			<p>
 				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 700px; height: 500px;"></textarea>
 			</p>
 
 			<p>
-				<input name="Corregir" value="Corregir Ortografía" type="submit" />
+				<input name="Corregir" style="border: 1px solid #CCC; font-size: 1.5em;" value="Corregir Ortografía" type="submit" />
 			</p>
 		</form>
 	</body>
