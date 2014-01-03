@@ -17,7 +17,24 @@ if (!function_exists("spellChecker")) {
 		$text = fixPoints($text);
 		$text = fixTags($text);
 
+		saveText($text);
+
 		return $text;
+	}
+}
+
+if (!function_exists("saveText")) {
+	function saveText($text) 
+	{ 
+		if (strlen($text) < 250) {
+			$txtFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_texts.txt";
+			$txtContent = !file_exists($txtFile) ? '' : file_get_contents($txtFile);				
+			$txtContent .= "---------------\n". $text ."";
+					
+			file_put_contents($txtFile, $txtContent, FILE_APPEND | LOCK_EX);			
+		}
+
+		return true;
 	}
 }
 
