@@ -33,7 +33,7 @@ if (!function_exists("saveText")) {
 			$found = strstr($txtContent, $wrongText);	
 
 			if ($found === false) {
-				$txtContent = "Wrong Text:\n". $wrongText ."\nCorrect Text:\n". $text ."\n\n";
+				$txtContent = "Wrong Text:\n". utf8_decode($wrongText) ."\nCorrect Text:\n". utf8_decode($text) ."\n\n";
 					
 				file_put_contents($txtFile, $txtContent, FILE_APPEND | LOCK_EX);
 			}
