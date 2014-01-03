@@ -27,7 +27,9 @@ if (!function_exists("fixCaps")) {
 		$parts = explode(" ", $text);
 		
 		if (count($parts) >= 3) {
-			die(var_dump($parts));
+			if (strlen($parts[0]) > 3) {
+				die($parts[0]);
+			}
 			$word = (strlen($parts[0]) > 3) ? $parts[0] : (strlen($parts[1]) > 3) ? $parts[1] : $parts[2];
 		} else {
 			$word = (strlen($parts[0]) > 3) ? $parts[0] : $parts[1];
