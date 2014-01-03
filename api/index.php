@@ -2,7 +2,7 @@
 if (isset($_REQUEST["benchmark"])) {
     $time = microtime(true);
 }
-die(var_dump($_POST));
+
 if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 	if (strpos($_REQUEST["text"], " ") === false) {
 		header("Content-Type: text/html; charset=UTF-8");
