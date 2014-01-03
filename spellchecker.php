@@ -8,29 +8,29 @@
 include "config.php";
 
 if (!function_exists("spellChecker")) {
-	function spellChecker($text, $language = SCPHP_LANGUAGE) 
-	{		
-		$text = fixCaps($text);
+	function spellChecker($wrongText, $language = SCPHP_LANGUAGE) 
+	{				
+		$text = fixCaps($wrongText);
 		$text = fixOrthography($text, $language);
 		$text = fixSpaces($text);		
 		$text = fixParenthesis($text);
 		$text = fixPoints($text);
-		$text = fixTags($text);
+		$text = fixTags($text);		
 
-		saveText($text);
-
+		saveText($wrongText, $text, $language);
+		
 		return $text;
 	}
 }
 
 if (!function_exists("saveText")) {
-	function saveText($text) 
+	function saveText($wrongText, $text, $language) 
 	{ 
 		if (strlen($text) < 250) {
 			$txtFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_texts.txt";
-			die(var_dump($txtFile));
+			
 			$txtContent = !file_exists($txtFile) ? '' : file_get_contents($txtFile);				
-			$txtContent .= "---------------\n". $text ."\n\n";
+			$txtContent .= "----------\n". $wrongText ."\n==========". $text ."\n\n";
 					
 			file_put_contents($txtFile, $txtContent, FILE_APPEND | LOCK_EX);			
 		}
