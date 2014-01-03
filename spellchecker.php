@@ -11,10 +11,23 @@ if (!function_exists("spellChecker")) {
 	function spellChecker($text, $language = SCPHP_LANGUAGE) 
 	{		
 		$text = fixOrthography($text, $language);
+		$text = fixCaps($text);
 		$text = fixSpaces($text);		
 		$text = fixParenthesis($text);
 		$text = fixPoints($text);
 		$text = fixTags($text);
+
+		return $text;
+	}
+}
+
+if (!function_exists("fixCaps")) {
+	function fixCaps($text) 
+	{ 
+		if (ctype_upper($text)) {
+			$text = ucfirst(strtolower($text));
+			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
+		}
 
 		return $text;
 	}
@@ -98,7 +111,7 @@ if (!function_exists("fixPoints")) {
 	function fixPoints($text)
 	{
 		$text{0} = strtoupper($text{0});
-		
+
 		$pattern = '/\.\w+ /i';
 
 		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
