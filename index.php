@@ -1,10 +1,40 @@
 <?php
 include "spellchecker.php";
 
-$text = 'Hola Codejobers.Me gustaria compartirles este pequeño codigo,es un script que sirve para <strong>corregir</strong> las faltas de <em>ortografia</em> y de <u>redaccion</u>.';
-
 header("Content-Type: text/html; charset=UTF-8");
+?>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>SpellCheckerPHP: El corrector ortográfico en Español para tu Web</title>
 
-echo "<strong>Cadena original:</strong> ". $text . "<br />";
-echo "<strong>Cadena corregida:</strong> ". spellChecker($text) ."<br />";
-echo 'No olvides visitar <a href="http://www.codejobs.biz" target="_blank">www.codejobs.biz</a>';
+		<style>	
+			body {
+				background-color: #FF5;
+				color: #333;
+				font-size: 1em;
+				font-family: Arial, Verdana;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>SpellCheckerPHP: El corrector ortográfico en Español para tu Web</h1>
+
+		<p>
+			Puedes corregir tus textos en línea:
+		</p>
+
+		<form action="/api" method="post">
+			<h3>Text a corregir</h3>
+			
+			<p>
+				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 700px; height: 500px;"></textarea>
+			</p>
+
+			<p>
+				<input name="Corregir" value="Corregir Ortografía" type="submit" />
+			</p>
+		</form>
+	</body>
+</html>
