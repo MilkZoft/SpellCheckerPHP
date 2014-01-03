@@ -32,10 +32,12 @@ if (!function_exists("fixCaps")) {
 			$word = (strlen($parts[0]) > 3) ? $parts[0] : $parts[1];
 		}
 
-		if ((ctype_upper($word{0}) and ctype_lower($word{1}) and ctype_upper($word{2})) or (ctype_lower($word{0}) and ctype_upper($word{1}) and ctype_lower($word{2}))) {
-			die(var_dump($word));
+		if ((ctype_upper($word{0}) and ctype_lower($word{1}) and ctype_upper($word{2})) or (ctype_lower($word{0}) and ctype_upper($word{1}) and ctype_lower($word{2}))) {		
 			$text = ucfirst(strtolower($text));
 			$text = str_replace("Ñ", "ñ", $text);
+			$text = str_replace("ii", "i", $text);
+			$text = str_replace("0o", "o", $text);
+
 			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
 		}
 
