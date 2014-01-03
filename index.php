@@ -6,7 +6,7 @@ header("Content-Type: text/html; charset=UTF-8");
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title>SpellCheckerPHP: El corrector ortográfico en Español para tu Web</title>
+		<title>SpellCheckerPHP (Beta): El corrector ortográfico en Español para tu Web</title>
 
 		<style>	
 			body {
@@ -19,14 +19,14 @@ header("Content-Type: text/html; charset=UTF-8");
 	</head>
 
 	<body>
-		<h1>SpellCheckerPHP: El corrector ortográfico en Español para tu Web</h1>
+		<h1>SpellCheckerPHP (Beta): El corrector ortográfico en Español para tu Web</h1>
 
 		<p>
 			Puedes corregir tus textos en línea:
 		</p>
 
 		<form action="api/index.php" method="post">
-			<h3>Text a corregir</h3>
+			<h3>Texto a corregir</h3>
 
 			<p>
 				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 700px; height: 500px;"></textarea>
