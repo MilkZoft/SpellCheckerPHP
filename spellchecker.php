@@ -28,6 +28,7 @@ if (!function_exists("saveText")) {
 	{ 
 		if (strlen($text) < 250) {
 			$txtFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_texts.txt";
+			die(var_dump($txtFile));
 			$txtContent = !file_exists($txtFile) ? '' : file_get_contents($txtFile);				
 			$txtContent .= "---------------\n". $text ."\n\n";
 					
