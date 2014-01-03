@@ -24,10 +24,20 @@ if (!function_exists("spellChecker")) {
 if (!function_exists("fixCaps")) {
 	function fixCaps($text) 
 	{ 
-		$text = ucfirst(strtolower($text));
-		$text = str_replace("Ñ", "ñ", $text);
-		$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
+		$parts = explode(" ", $text);
 		
+		if (count($parts) >= 3) {
+			$word = (strlen($parts[0]) > 3) ? $parts[0] : (strlen($parts[1]) > 3) ? $parts[1] : $parts[2];
+		} else {
+			$word = (strlen($parts[0]) > 3) ? $parts[0] : $parts[1];
+		}
+
+		if ((ctype_upper($word{0}) and ctype_lower($word{1}) and ctype_upper($word{2})) or (ctype_lower($word{0}) and ctype_upper($word{1}) and ctype_lower($word{2}))) {
+			$text = ucfirst(strtolower($text));
+			$text = str_replace("Ñ", "ñ", $text);
+			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
+		}
+
 		return $text;
 	}
 }

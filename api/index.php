@@ -7,7 +7,7 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 	if (strpos($_REQUEST["text"], " ") === false) {
 		header("Content-Type: text/html; charset=UTF-8");
 
-		echo 'Error: You need to write a sentence not only a single word.';
+		echo 'Error: You need to write a sentence not only a single word!';
 	} else {
 		if (isset($_REQUEST["language"]) and $_REQUEST["language"] == "english") {
 			$language = "spanish"; // This will change once we create the english dictionary.
