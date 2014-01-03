@@ -33,6 +33,7 @@ if (!function_exists("fixCaps")) {
 		}
 
 		if ((ctype_upper($word{0}) and ctype_lower($word{1}) and ctype_upper($word{2})) or (ctype_lower($word{0}) and ctype_upper($word{1}) and ctype_lower($word{2}))) {
+			die(var_dump($word));
 			$text = ucfirst(strtolower($text));
 			$text = str_replace("Ñ", "ñ", $text);
 			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
