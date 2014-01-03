@@ -37,6 +37,7 @@ if (!function_exists("fixCaps")) {
 			$text = str_replace("Ñ", "ñ", $text);
 			$text = str_replace("ii", "i", $text);
 			$text = str_replace("0o", "o", $text);
+			$text = str_replace("o0", "o", $text);
 
 			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
 		}
