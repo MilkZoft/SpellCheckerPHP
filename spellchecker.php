@@ -30,7 +30,7 @@ if (!function_exists("saveText")) {
 			$txtFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_texts.txt";
 			
 			$txtContent = !file_exists($txtFile) ? '' : file_get_contents($txtFile);				
-			$txtContent .= "----------\n". $wrongText ."\n==========". $text ."\n\n";
+			$txtContent .= "----------\n". $wrongText ."\n==========\n". $text ."\n\n";
 					
 			file_put_contents($txtFile, $txtContent, FILE_APPEND | LOCK_EX);			
 		}
