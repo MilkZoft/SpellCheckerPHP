@@ -25,7 +25,7 @@ header("Content-Type: text/html; charset=UTF-8");
 			Puedes corregir tus textos en línea:
 		</p>
 
-		<form action="/api" method="post">
+		<form action="api/index.php" method="post">
 			<h3>Text a corregir</h3>
 
 			<p>
