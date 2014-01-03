@@ -74,6 +74,7 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 }
 
 if (isset($_REQUEST["benchmark"])) {
-	die("si");
-	echo '<br /><p><strong>Benchmark:</strong> '. microtime(true) - $time .'</p>';
+	$benchmark = microtime(true) - $time;
+	
+	echo '<br /><p><strong>Benchmark:</strong> '. $benchmark .'</p>';
 }
