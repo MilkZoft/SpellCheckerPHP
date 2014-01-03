@@ -28,7 +28,7 @@ if (!function_exists("saveText")) {
 	{ 
 		if (strlen($text) < 250) {
 			$txtFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_texts.txt";						
-			$txtContent = "----------\n". $wrongText ."\n==========\n". $text ."\n";
+			$txtContent = "Wrong Text:\n". $wrongText ."\nCorrect Text:\n". $text ."\n\n";
 					
 			file_put_contents($txtFile, $txtContent, FILE_APPEND | LOCK_EX);			
 		}
