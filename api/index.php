@@ -1,6 +1,5 @@
 <?php
 if (isset($_REQUEST["benchmark"])) {
-	ob_start();
     $time = microtime(true);
 }
 
@@ -76,5 +75,4 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 
 if (isset($_REQUEST["benchmark"])) {
 	echo '<p><strong>Benchmark:</strong> '. microtime(true) - $time .'</p>';
-    ob_end_clean();
 }
