@@ -27,11 +27,12 @@ if (!function_exists("fixCaps")) {
 		$parts = explode(" ", $text);
 		
 		if (count($parts) >= 3) {
+			die(var_dump($parts));
 			$word = (strlen($parts[0]) > 3) ? $parts[0] : (strlen($parts[1]) > 3) ? $parts[1] : $parts[2];
 		} else {
 			$word = (strlen($parts[0]) > 3) ? $parts[0] : $parts[1];
 		}
-		die(var_dump($word));
+
 		if ((ctype_upper($word{0}) and ctype_lower($word{1}) and ctype_upper($word{2})) or (ctype_lower($word{0}) and ctype_upper($word{1}) and ctype_lower($word{2}))) {		
 			$text = ucfirst(strtolower($text));
 			$text = str_replace("Ñ", "ñ", $text);
