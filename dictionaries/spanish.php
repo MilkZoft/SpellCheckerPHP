@@ -1682,12 +1682,16 @@ return array(
 	"/\bdioz\b/" => "Dios", 
 	"/\bKe\b/" => "Que", 
 	"/\bke\b/" => "que", 
+	"/\bLlendo\b/" => "Yendo", 
+	"/\bllendo\b/" => "yendo", 
 	"/\bMaz\b/" => "Más", 
 	"/\bmaz\b/" => "más", 
 	"/\bPrueva\b/" => "Prueba", 
 	"/\bprueva\b/" => "prueba",
 	"/\bQeu\b/" => "Que", 
 	"/\bqeu\b/" => "que",
+	"/\bVuenos\b/" => "Buenos", 
+	"/\bvuenos\b/" => "buenos",
 
 	// Redaction mistakes
 	"/\ba basto\b/" => "abasto",
@@ -1703,6 +1707,7 @@ return array(
 
 	// Countries
 	"/\bbrasil\b/" => "Brasil",
+	"/\bBrazil\b/" => "Brasil",
 	"/\bbrazil\b/" => "Brasil",
 	"/\bMexico\b/" => "México",
 	"/\bmexico\b/" => "México",
