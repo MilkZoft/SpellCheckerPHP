@@ -1675,12 +1675,22 @@ return array(
 	"/\bvinculos\b/" => "vínculos",
 
 	// Misspelled words
+	"/\bAdioz\b/" => "Adiós", 
+	"/\badioz\b/" => "adiós",
+	"/\bdios\b/" => "Dios",
+	"/\bDioz\b/" => "Dios", 
+	"/\bdioz\b/" => "Dios", 
 	"/\bKe\b/" => "Que", 
 	"/\bke\b/" => "que", 
 	"/\bMaz\b/" => "Más", 
 	"/\bmaz\b/" => "más", 
 	"/\bPrueva\b/" => "Prueba", 
 	"/\bprueva\b/" => "prueba",
+	"/\bQeu\b/" => "Que", 
+	"/\bqeu\b/" => "que",
+
+	// Redaction mistakes
+	"/\ba basto\b/" => "abasto",
 
 	// Names & Surnames
 	"/\bCalderon\b/" => "Calderón", 
@@ -1694,7 +1704,6 @@ return array(
 	// Countries
 	"/\bbrasil\b/" => "Brasil",
 	"/\bbrazil\b/" => "Brasil",
-
 	"/\bMexico\b/" => "México",
 	"/\bmexico\b/" => "México",
 	"/\bMejico\b/" => "México",
