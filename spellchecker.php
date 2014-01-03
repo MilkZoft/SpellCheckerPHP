@@ -28,11 +28,18 @@ if (!function_exists("fixCaps")) {
 		
 		if (count($parts) >= 3) {
 			if (strlen($parts[0]) > 3) {
-				die($parts[0]);
-			}
-			$word = (strlen($parts[0]) > 3) ? $parts[0] : (strlen($parts[1]) > 3) ? $parts[1] : $parts[2];
+				$word = $parts[0];
+			} elseif (strlen($parts[1]) > 3) {
+				$word = $parts[1];
+			} else {
+				$word = $parts[2];
+			}			
 		} else {
-			$word = (strlen($parts[0]) > 3) ? $parts[0] : $parts[1];
+			if (strlen($parts[0]) > 3) {
+				$word = $parts[0];
+			} else {
+				$word = $parts[1];
+			}			
 		}
 
 		if ((ctype_upper($word{0}) and ctype_lower($word{1}) and ctype_upper($word{2})) or (ctype_lower($word{0}) and ctype_upper($word{1}) and ctype_lower($word{2}))) {		
