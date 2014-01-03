@@ -24,10 +24,10 @@ if (!function_exists("spellChecker")) {
 if (!function_exists("fixCaps")) {
 	function fixCaps($text) 
 	{ 
-		if (ctype_upper($text)) {
+		if (preg_match('#^[A-Z]+$#', $text)) {
 			$text = ucfirst(strtolower($text));
 			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
-		}
+		} 
 
 		return $text;
 	}
