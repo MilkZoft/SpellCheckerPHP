@@ -5,6 +5,7 @@ return array(
 	" bién" => " bien",
 	"bohemía" => "bohemia",
 	"caricía" => "caricia",
+	"comás" => "comas",
 	"estatúa" => "estatua",
 	"llamás" => "llamas",
 	"Pure de papá" => "Pure de papa", 
