@@ -214,22 +214,6 @@ if (!function_exists("fixTags")) {
 if (!function_exists("fixParenthesis")) {
 	function fixParenthesis($text) 
 	{
-		$pattern = '/\w+\(/i';
-
-		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
-
-		$count = count($matches);
-
-		if ($count > 0) {
-			for ($i = 0; $i < $count; $i++) {
-				$mistake = $matches[$i][0];
-
-				$fixedWord = str_replace("(", " (", $mistake);
-				
-				$text = str_replace($mistake, $fixedWord, $text);
-			}
-		}
-
 		$pattern = '/\( \w+/i';
 
 		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
