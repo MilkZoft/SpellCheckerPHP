@@ -29,7 +29,11 @@ if (!function_exists("fixWords")) {
 	{ 
 		$words = include SCPHP_DICTIONARIES_PATH . $language ."_fix_words.php";
 			
-		return preg_replace(array_keys($words), array_values($words), $text);
+		foreach ($words as $incorrect => $correct) {
+			$text = str_replace($incorrect, $correct, $text);
+		}
+
+		return $text;
 	}
 }
 
