@@ -20,7 +20,7 @@ if (!function_exists("spellChecker")) {
 
 		saveText($wrongText, $text, $language);
 		
-		return $text;
+		return stripslashes($text);
 	}
 }
 
