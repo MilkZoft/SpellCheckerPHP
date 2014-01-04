@@ -37,10 +37,10 @@ if (isset($_POST["text"])) {
 		</p>
 
 		<form action="index.php" method="post">
-			<h3>Texto a corregir</h3>
+			<h3>Texto a corregir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Texto corregido</h3>
 
 			<p>
-				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"></textarea>
+				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"></textarea> &nbsp;
 				<textarea name="fixedText" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"><?php echo $fixedText; ?></textarea>
 			</p>
 
