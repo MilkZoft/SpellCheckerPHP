@@ -96,6 +96,8 @@ if (!function_exists("fixCaps")) {
 			$text = str_replace("o0", "o", $text);
 
 			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
+		} else {
+			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
 		}
 
 		return $text;
