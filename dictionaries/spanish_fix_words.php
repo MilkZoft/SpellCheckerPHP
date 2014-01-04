@@ -7,6 +7,7 @@ return array(
 	"caricía" => "caricia",
 	"comás" => "comas",
 	"estatúa" => "estatua",
+	"Function" => "function",
 	"llamás" => "llamas",
 	"Pure de papá" => "Pure de papa", 
 	"pure de papá" => "pure de papa",
