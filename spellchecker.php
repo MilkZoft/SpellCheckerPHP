@@ -16,7 +16,7 @@ if (!function_exists("spellChecker")) {
 		$text = fixParenthesis($text);
 		$text = fixPoints($text);
 		$text = fixTags($text);
-		$text = fixWords($text);
+		$text = fixWords($text, $language);
 
 		saveText($wrongText, $text, $language);
 		
