@@ -4,7 +4,7 @@ include "spellchecker.php";
 header("Content-Type: text/html; charset=UTF-8");
 
 function spellChecker($text, $type = "html", $language = "spanish")  {
-	return file_get_contents("api/?type=". $type ."&language=". $language ."&text=". urlencode($text));
+	return file_get_contents("api/index.php?type=". $type ."&language=". $language ."&text=". urlencode($text));
 }
 
 if (isset($_POST["text"])) {
