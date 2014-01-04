@@ -29,7 +29,7 @@ header("Content-Type: text/html; charset=UTF-8");
 			<h3>Texto a corregir</h3>
 
 			<p>
-				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 700px; height: 500px;"></textarea>
+				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 700px; height: 400px;"></textarea>
 			</p>
 
 			<p>
