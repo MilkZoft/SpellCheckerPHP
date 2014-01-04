@@ -44,11 +44,11 @@ if (isset($_POST["text"])) {
 
 			<p>
 				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left; margin-right: 10px;"></textarea> &nbsp;
-				<textarea name="fixedText" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left; clear: both;"><?php echo $fixedText; ?></textarea>
+				<textarea name="fixedText" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"><?php echo $fixedText; ?></textarea>
 			</p>
 
 			<p>
-				<input name="Corregir" style="border: 1px solid #CCC; font-size: 1.5em;" value="Corregir Ortografía" type="submit" />
+				<input name="Corregir" style="border: 1px solid #CCC; font-size: 1.5em; clear: both;" value="Corregir Ortografía" type="submit" />
 			</p>
 		</form>
 	</body>
