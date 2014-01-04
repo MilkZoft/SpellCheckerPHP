@@ -3,14 +3,14 @@ include "spellchecker.php";
 
 header("Content-Type: text/html; charset=UTF-8");
 
-function spellChecker($text, $type = "html", $language = "spanish")  {
-	return file_get_contents("api/index.php?type=". $type ."&language=". $language ."&text=". urlencode($text));
-}
-
 if (isset($_POST["text"])) {
-	$fixedText = spellChecker($_POST["text"]);
+	suggestWords($_REQUEST["text"], $language);
+
+	$text = $_REQUEST["text"];
+	$fixedText = spellChecker($_REQUEST["text"], "spanish");
 } else {
 	$fixedText = "";
+	$text = "";
 }
 
 ?>
@@ -43,7 +43,7 @@ if (isset($_POST["text"])) {
 			Texto corregido</h3>
 
 			<p>
-				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left; margin-right: 10px;"></textarea> &nbsp;
+				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left; margin-right: 10px;"><?php echo $text; ?></textarea> &nbsp;
 				<textarea name="fixedText" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"><?php echo $fixedText; ?></textarea>
 			</p>
 
