@@ -47,7 +47,7 @@ if (isset($_POST["text"])) {
 				<textarea name="fixedText" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"><?php echo $fixedText; ?></textarea>
 			</p>
 
-			<p style="clear: both;">
+			<p style="clear: both; margin-top: 15px;">
 				<input name="Corregir" style="border: 1px solid #CCC; font-size: 1.5em;" value="Corregir Ortografía" type="submit" />
 			</p>
 		</form>
