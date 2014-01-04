@@ -80,25 +80,16 @@ if (!function_exists("fixCaps")) {
 
 		$upperText = strtoupper($text);
 
-		if ((ctype_upper($word{0}) and ctype_lower($word{1}) and ctype_upper($word{2})) or (ctype_lower($word{0}) and ctype_upper($word{1}) and ctype_lower($word{2}))) {		
+		if ((ctype_upper($word{0}) and ctype_lower($word{1}) and ctype_upper($word{2})) or (ctype_lower($word{0}) and ctype_upper($word{1}) and ctype_lower($word{2})) or ($upperText == $text)) {		
 			$text = ucfirst(strtolower($text));
-			$text = str_replace("Ñ", "ñ", $text);
-			$text = str_replace("ii", "i", $text);
-			$text = str_replace("0o", "o", $text);
-			$text = str_replace("o0", "o", $text);
-
-			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
-		} elseif ($upperText == $text) {
-			$text = ucfirst(strtolower($text));
-			$text = str_replace("Ñ", "ñ", $text);
-			$text = str_replace("ii", "i", $text);
-			$text = str_replace("0o", "o", $text);
-			$text = str_replace("o0", "o", $text);
-
-			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
-		} else {
-			$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
 		}
+
+		$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
+		$text{0} = ucfirst($text{0});
+		$text = str_replace("Ñ", "ñ", $text);
+		$text = str_replace("ii", "i", $text);
+		$text = str_replace("0o", "o", $text);
+		$text = str_replace("o0", "o", $text);
 
 		return $text;
 	}
