@@ -15,11 +15,21 @@ if (!function_exists("spellChecker")) {
 		$text = fixSpaces($text);		
 		$text = fixParenthesis($text);
 		$text = fixPoints($text);
-		$text = fixTags($text);		
+		$text = fixTags($text);
+		$text = fixWords($text);
 
 		saveText($wrongText, $text, $language);
 		
 		return $text;
+	}
+}
+
+if (!function_exists("fixWords")) {
+	function fixWords($text, $language) 
+	{ 
+		$words = include SCPHP_DICTIONARIES_PATH . $language ."_fix_words.php";
+			
+		return preg_replace(array_keys($words), array_values($words), $text);
 	}
 }
 
