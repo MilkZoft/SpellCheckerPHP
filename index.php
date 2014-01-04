@@ -6,7 +6,7 @@ header("Content-Type: text/html; charset=UTF-8");
 if (isset($_POST["text"])) {
 	suggestWords($_REQUEST["text"], $language);
 
-	$text = $_REQUEST["text"];
+	$text = stripslashes($_REQUEST["text"]);
 	$fixedText = spellChecker($_REQUEST["text"], "spanish");
 } else {
 	$fixedText = "";
