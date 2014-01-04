@@ -2,6 +2,17 @@
 include "spellchecker.php";
 
 header("Content-Type: text/html; charset=UTF-8");
+
+function spellChecker($text, $type = "html", $language = "spanish")  {
+	return file_get_contents("http://spellcheckerphp.com/api/?type=". $type ."&language=". $language ."&text=". urlencode($text));
+}
+
+if (isset($_POST["text"])) {
+	$fixedText = spellChecker($_POST["text"]);
+} else {
+	$fixedText = "";
+}
+
 ?>
 <html>
 	<head>
@@ -25,11 +36,17 @@ header("Content-Type: text/html; charset=UTF-8");
 			Puedes corregir tus textos en línea:
 		</p>
 
-		<form action="api/index.php" method="post">
+		<form action="index.php" method="post">
 			<h3>Texto a corregir</h3>
 
 			<p>
-				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 700px; height: 400px;"></textarea>
+				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"></textarea>
+			</p>
+
+			<h3>Texto corregido</h3>
+
+			<p>
+				<textarea name="fixedText" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"><?php echo $fixedText; ?></textarea>
 			</p>
 
 			<p>
