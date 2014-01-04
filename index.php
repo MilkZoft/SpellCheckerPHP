@@ -41,11 +41,6 @@ if (isset($_POST["text"])) {
 
 			<p>
 				<textarea name="text" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"></textarea>
-			</p>
-
-			<h3>Texto corregido</h3>
-
-			<p>
 				<textarea name="fixedText" style="border: 1px solid #CCC; background-color: #EEE; width: 300px; height: 300px; float: left;"><?php echo $fixedText; ?></textarea>
 			</p>
 
