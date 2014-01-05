@@ -29,6 +29,8 @@ return array(
 	"llamás" => "llamas",
 	"Mientrás" => "Mientras",
 	"mientrás" => "mientras",
+	"Me as" => "Me has",
+	"me as" => "me has",
 	"Ola que ase" => "Hola que hace",
 	"Ola k ase" => "Hola que hace",
 	"ola que ase" => "hola que hace",
