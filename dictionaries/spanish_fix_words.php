@@ -28,6 +28,7 @@ return array(
 	"el hasta" => "el asta",
 	"estatúa" => "estatua",
 	"Function" => "function",
+	" grán " => " gran ",
 	"llamás" => "llamas",
 	"Mientrás" => "Mientras",
 	"mientrás" => "mientras",
@@ -42,6 +43,8 @@ return array(
 	"Pure de papá" => "Pure de papa", 
 	"pure de papá" => "pure de papa",
 	" són " => " son ",
+	"te hecho" => "te echo",
+	"la hecho" => "la echo",
 	"ví" => "vi",
 	"voz grabe" => "voz grave",
 );
