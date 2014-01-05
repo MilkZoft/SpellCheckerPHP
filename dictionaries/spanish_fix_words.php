@@ -36,4 +36,6 @@ return array(
 	"Pure de papá" => "Pure de papa", 
 	"pure de papá" => "pure de papa",
 	" són " => " son ",
+	"ví" => "vi",
+	"voz grabe" => "voz grave",
 );
