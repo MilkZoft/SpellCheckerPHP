@@ -4,10 +4,16 @@ include "spellchecker.php";
 header("Content-Type: text/html; charset=UTF-8");
 
 if (isset($_POST["text"])) {
-	suggestWords($_REQUEST["text"], $language);
+	$text = trim($_REQUEST["text"]);
 
-	$text = stripslashes($_REQUEST["text"]);
-	$fixedText = spellChecker($_REQUEST["text"], "spanish");
+	if ($text == "") {
+		$fixedText = "Error: You must write a text to fix."
+	} else {  
+		suggestWords($_REQUEST["text"], $language);
+
+		$text = stripslashes($_REQUEST["text"]);
+		$fixedText = spellChecker($_REQUEST["text"], "spanish");
+	}
 } else {
 	$fixedText = "";
 	$text = "";
