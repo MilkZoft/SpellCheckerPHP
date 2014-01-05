@@ -17,6 +17,7 @@ return array(
 	"uuu" => "u",
 	"Uuu" => "U",
 	"lll" => "l",
+	"lll" => "l",
 	"estatúa" => "estatua",
 	"Function" => "function",
 	"llamás" => "llamas",
