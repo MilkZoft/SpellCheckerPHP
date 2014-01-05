@@ -7,7 +7,7 @@ if (isset($_POST["text"])) {
 	$text = trim($_REQUEST["text"]);
 
 	if ($text == "") {
-		$fixedText = "Error: You must write a text to fix."
+		$fixedText = "Error: You must write a text to fix.";
 	} else {  
 		suggestWords($_REQUEST["text"], $language);
 
