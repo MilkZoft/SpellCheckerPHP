@@ -1,5 +1,9 @@
 <?php
 return array(
+	"¿Que" => "¿Qué",
+	"¿Como" => "¿Cómo",
+	"¿Cual" => "¿Cuál",
+	"¿Quien" => "¿Quién",
 	"angustía" => "angustia",
 	" bién " => " bien ",
 	" bién" => " bien",
