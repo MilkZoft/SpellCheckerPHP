@@ -33,6 +33,8 @@ return array(
 	"Ola k ase" => "Hola que hace",
 	"ola que ase" => "hola que hace",
 	"ola k ase" => "hola que hace",
+	"Presencía" => "Presencia",
+	"presencía" => "presencia",
 	"Pure de papá" => "Pure de papa", 
 	"pure de papá" => "pure de papa",
 	" són " => " son ",
