@@ -10,6 +10,7 @@ return array(
 	"bohemía" => "bohemia",
 	"caricía" => "caricia",
 	"comás" => "comas",
+	" dí " => " di ",
 	"aaa" => "a",
 	"Aaa" => "A",
 	"eee" => "e",
