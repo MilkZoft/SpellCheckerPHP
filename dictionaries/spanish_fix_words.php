@@ -9,6 +9,8 @@ return array(
 	"estatúa" => "estatua",
 	"Function" => "function",
 	"llamás" => "llamas",
+	"Mientrás" => "Mientras",
+	"mientrás" => "mientras",
 	"Ola que ase" => "Hola que hace",
 	"Ola k ase" => "Hola que hace",
 	"ola que ase" => "hola que hace",
