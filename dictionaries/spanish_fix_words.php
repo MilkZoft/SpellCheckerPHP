@@ -24,6 +24,7 @@ return array(
 	"lllll" => "l",
 	"llll" => "l",
 	"lll" => "l",
+	"el hasta" => "el asta",
 	"estatúa" => "estatua",
 	"Function" => "function",
 	"llamás" => "llamas",
