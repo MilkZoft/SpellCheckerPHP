@@ -1,6 +1,5 @@
 <?php
 return array(
-	",  " => ", ",
 	"¿Que" => "¿Qué",
 	"¿Como" => "¿Cómo",
 	"¿Cual" => "¿Cuál",
@@ -68,4 +67,6 @@ return array(
 	"la hecho" => "la echo",
 	"ví" => "vi",
 	"voz grabe" => "voz grave",
+	",  " => ", ",
+	"  " => " ",
 );
