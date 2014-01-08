@@ -42,6 +42,8 @@ return array(
 	"Me as" => "Me has",
 	"me as" => "me has",
 	" mí " => " mi ",
+	"Nacíó" => "Nació",
+	"nacíó" => "nació",
 	"No sé porqué" => "No sé por qué",
 	"No sé porque" => "No sé por qué",
 	"No sé por que" => "No sé por qué",
