@@ -4,6 +4,8 @@ return array(
 	"¿Como" => "¿Cómo",
 	"¿Cual" => "¿Cuál",
 	"¿Quien" => "¿Quién",
+	"¿Donde" => "¿Dónde",
+	"¿Porque" => "¿Por qué",
 	"¿porque" => "¿Por qué",
 	"angustía" => "angustia",
 	" bién " => " bien ",
@@ -69,6 +71,7 @@ return array(
 	"ví" => "vi",
 	"voz grabe" => "voz grave",
 	"votarón" => "votaron",
+	"Yo se" => "Yo sé",
 	",  " => ", ",
 	"  " => " ",
 );
