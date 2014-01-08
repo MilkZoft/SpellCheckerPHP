@@ -11,6 +11,7 @@ return array(
 	"bohemía" => "bohemia",
 	"caricía" => "caricia",
 	"comás" => "comas",
+	"como que no" => "cómo que no",
 	" dí " => " di ",
 	"aaa" => "a",
 	"Aaa" => "A",
@@ -67,6 +68,7 @@ return array(
 	"la hecho" => "la echo",
 	"ví" => "vi",
 	"voz grabe" => "voz grave",
+	"votarón" => "votaron",
 	",  " => ", ",
 	"  " => " ",
 );
