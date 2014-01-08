@@ -40,7 +40,7 @@ if (!function_exists("fixWords")) {
 if (!function_exists("saveText")) {
 	function saveText($wrongText, $text, $language) 
 	{ 
-		if (strlen($text) < 250) {
+		if (strlen($text) < 1000) {
 			$txtFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_texts.txt";			
 			$txtContent = !file_exists($txtFile) ? null : file_get_contents($txtFile);
 
