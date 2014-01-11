@@ -16,7 +16,7 @@ if (!function_exists("spellChecker")) {
 		$text = fixParenthesis($text);
 		$text = fixDots($text);
 		$text = fixWords($text, $language);
-		die(var_dump($text));
+		
 		saveText($wrongText, $text, $language);
 		
 		return stripslashes(ucfirst($text));
@@ -96,6 +96,8 @@ if (!function_exists("fixOrthography")) {
 				}
 			}
 		}
+
+		return $text;
 	}
 }
 
