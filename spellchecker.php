@@ -12,48 +12,14 @@ if (!function_exists("spellChecker")) {
 	{				
 		$text = fixCaps($wrongText);
 		$text = fixOrthography($text, $language);
-		$text = fixSpaces($text);		
+		$text = fixChars($text);		
 		$text = fixParenthesis($text);
-		$text = fixPoints($text);
-		$text = fixTags($text);
+		$text = fixDots($text);
 		$text = fixWords($text, $language);
 
 		saveText($wrongText, $text, $language);
 		
-		return stripslashes($text);
-	}
-}
-
-if (!function_exists("fixWords")) {
-	function fixWords($text, $language) 
-	{ 
-		$words = include SCPHP_DICTIONARIES_PATH . $language ."_fix_words.php";
-			
-		foreach ($words as $incorrect => $correct) {
-			$text = str_replace($incorrect, $correct, $text);
-		}
-
-		return $text;
-	}
-}
-
-if (!function_exists("saveText")) {
-	function saveText($wrongText, $text, $language) 
-	{ 
-		if (strlen($text) < 1000) {
-			$txtFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_texts.txt";			
-			$txtContent = !file_exists($txtFile) ? null : file_get_contents($txtFile);
-
-			$found = strstr($txtContent, $wrongText);	
-
-			if ($found === false) {
-				$txtContent = "Wrong Text:\n". utf8_decode($wrongText) ."\nCorrect Text:\n". utf8_decode($text) ."\n\n";
-					
-				file_put_contents($txtFile, $txtContent, FILE_APPEND | LOCK_EX);
-			}
-		}
-
-		return true;
+		return stripslashes(ucfirst($text));
 	}
 }
 
@@ -84,73 +50,57 @@ if (!function_exists("fixCaps")) {
 			$text = ucfirst(strtolower($text));
 		}
 
-		$text = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $text);
-		$text{0} = ucfirst($text{0});
-		$text = str_replace("Ñ", "ñ", $text);
-		$text = str_replace("ii", "i", $text);
-		$text = str_replace("0o", "o", $text);
-		$text = str_replace("o0", "o", $text);
-
 		return $text;
-	}
-}
-
-if (!function_exists("stripAccents")) {
-	function stripAccents($string) 
-	{ 
-		$characters = array(
-            "Á" => "A", "Ç" => "c", "É" => "e", "Í" => "i", "Ñ" => "n", "Ó" => "o", "Ú" => "u", "á" => "a", "ç" => "c", 
-            "é" => "e", "í" => "i", "ñ" => "n", "ó" => "o", "ú" => "u", "à" => "a", "è" => "e", "ì" => "i", "ò" => "o", 
-            "ù" => "u", "ã" => "a", "¿" => "", "?" =>  "", "¡" =>  "", "!" =>  "", ": " => "-"
-        );                
-                
-        return strtr($string, $characters); 
-	}
-}
-
-if (!function_exists("suggestWords")) {
-	function suggestWords($text, $language = SCPHP_LANGUAGE)
-	{
-		$pattern = '/([a-zA-Z]*[ÁÉÍÓÚÑáéíóúñ][a-zA-Z]*)/';
-
-		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
-		
-		$count = count($matches);		
-
-		if ($count > 0) {
-			for ($i = 0; $i < $count; $i++) {
-				if (isset($matches[$i][0]) and isset($matches[$i + 1][0])) {
-					$suggestedWords[stripAccents($matches[$i][0] . $matches[$i + 1][0])] = $matches[$i][0] . $matches[$i + 1][0];
-					$i++;
-				}
-			}
-	
-			$jsonFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_suggested.json";
-			$jsonContent = !file_exists($jsonFile) ? null : file_get_contents($jsonFile);
-			$alreadySuggestedWords = (array) json_decode($jsonContent, true);			
-
-			$jsonContent = json_encode(array_merge($alreadySuggestedWords, $suggestedWords));
-			
-			if (!file_exists($jsonFile)) {
-				file_put_contents($jsonFile, $jsonContent, FILE_APPEND | LOCK_EX);
-			} else {
-				file_put_contents($jsonFile, $jsonContent);
-			}
-		}
 	}
 }
 
 if (!function_exists("fixOrthography")) {
 	function fixOrthography($text, $language) 
 	{
-		$words = include SCPHP_DICTIONARIES_PATH . $language .".php";
+		try {
+			$db = new PDO('mysql:host='. SCPHP_DB_HOST .';dbname='. SCPHP_DB_NAME, SCPHP_DB_USER, SCPHP_DB_PWD);
+		} catch (PDOException $ex) {
+		    echo $ex->getMessage();
+		    exit;
+		} 
+
+		header('Content-Type: text/html; charset=UTF-8');
+
+
+		$text = fixDots($text);
+
+		$words = array_values(array_filter(array_unique(explode(" ", removeChars($text))), function ($word) {
+			return strlen(stripAccents($word)) >= 4 and !ctype_upper($word);
+		}));
+
+		$count = count($words); 
+
+		for ($i = 0; $i < $count; $i++) {
+			$words[$i] = trim($words[$i]);
 			
-		return preg_replace(array_keys($words), array_values($words), $text);
+			$query = "SELECT IncorrectWord, CorrectWord FROM sc_spanish_dictionary 
+					  WHERE MATCH (IncorrectWord, CommonMistakes) AGAINST('". stripAccents($words[$i]) ."') LIMIT 1";
+			
+			$result = $db->query($query);
+			
+			$data = $result->fetch(PDO::FETCH_ASSOC);
+			
+			if (isset($data["CorrectWord"])) {
+				$length1 = strlen($words[$i]);
+				$length2 = strlen($data["CorrectWord"]);
+
+				if (($length2 - $length1) <= 1) {
+					$word = (ctype_upper($words[$i]{0})) ? ucfirst($data["CorrectWord"]) : $data["CorrectWord"];
+					
+					$text = preg_replace("/\b". $words[$i] ."\b/", utf8_encode($word), $text);
+				}
+			}
+		}
 	}
 }
 
-if (!function_exists("fixSpaces")) {
-	function fixSpaces($text)
+if (!function_exists("fixChars")) {
+	function fixChars($text)
 	{
 		$text = str_replace("&nbsp; ", " ", $text);
 		$text = str_replace(".&nbsp;", ". ", $text);
@@ -164,49 +114,11 @@ if (!function_exists("fixSpaces")) {
 		$text = str_replace(" :", ": ", $text);
 		$text = str_replace("( ", "(", $text);
 		$text = str_replace(": )", " :)", $text);
+		$text = str_replace("Ñ", "ñ", $text);
+		$text = str_replace("ii", "i", $text);
+		$text = str_replace("0o", "o", $text);
+		$text = str_replace("o0", "o", $text);
 
-		return $text;
-	}
-}
-
-if (!function_exists("fixPoints")) {
-	function fixPoints($text)
-	{
-		$text{0} = strtoupper($text{0});
-
-		$pattern = '/\.\w+ /i';
-
-		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
-
-		$count = count($matches);
-
-		if ($count > 0) {
-			for ($i = 0; $i < $count; $i++) {
-				$mistake = $fixedWord = $matches[$i][0];
-				$fixedWord{1} = strtoupper($fixedWord{1});
-
-				$fixedWord = str_replace(".", ". ", $fixedWord);
-				
-				$text = str_replace($mistake, $fixedWord, $text);
-			}
-		}
-
-		return $text;
-	}
-}
-
-if (!function_exists("fixTags")) {
-	function fixTags($text, $tag = "span") 
-	{
-		$text = str_replace("<span>", "", $text);
-		$text = str_replace("</span>", "", $text);
-		$text = str_replace('<p>&nbsp;</p>', "", $text);
-		$text = str_replace('<strong> ', "<strong>", $text);
-		$text = str_replace(' </strong> ', "</strong>", $text);
-		$text = str_replace('<h3><strong>', "<h3>", $text);
-		$text = str_replace('</strong></h3>', "</h3>", $text);
-		$text = str_replace("<div>&nbsp;</div>", '<div style="page-break-after: always;"><span style="display: none;">&nbsp;</span></div>', $text);
-		
 		return $text;
 	}
 }
@@ -263,5 +175,144 @@ if (!function_exists("fixParenthesis")) {
 		}
 
 		return $text;
+	}
+}
+
+
+if (!function_exists("fixDots")) {
+	function fixDots($text) 
+	{
+		$text = html_entity_decode($text);
+
+		$text = preg_replace("/\.([0-9A-Za-z]{4,15})/", ". $1", $text);
+		$text = str_replace("www. ", "www.", $text);
+		$text = preg_replace_callback("/\.\s[a-z]/", function ($matches) {
+		     return strtoupper($matches[0]);
+		}, $text);
+
+		$text = str_replace(",", ", ", $text);
+		$text = str_replace(" ,", ", ", $text);
+		$text = str_replace(" , ", ", ", $text);
+
+		return $text;
+	}
+}
+
+if (!function_exists("fixWords")) {
+	function fixWords($text, $language) 
+	{ 
+		$words = include SCPHP_DICTIONARIES_PATH . $language ."_fix_words.php";
+			
+		foreach ($words as $incorrect => $correct) {
+			$text = str_replace($incorrect, $correct, $text);
+		}
+
+		return $text;
+	}
+}
+
+if (!function_exists("saveText")) {
+	function saveText($wrongText, $text, $language) 
+	{ 
+		if (strlen($text) < 1000) {
+			$txtFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_texts.txt";			
+			$txtContent = !file_exists($txtFile) ? null : file_get_contents($txtFile);
+
+			$found = strstr($txtContent, $wrongText);	
+
+			if ($found === false) {
+				$txtContent = "Wrong Text:\n". utf8_decode($wrongText) ."\nCorrect Text:\n". utf8_decode($text) ."\n\n";
+					
+				file_put_contents($txtFile, $txtContent, FILE_APPEND | LOCK_EX);
+			}
+		}
+
+		return true;
+	}
+}
+
+if (!function_exists("stripAccents")) {
+	function stripAccents($string) 
+	{ 
+		$characters = array(
+            "Á" => "A", "Ç" => "c", "É" => "e", "Í" => "i", "Ñ" => "n", "Ó" => "o", "Ú" => "u", "á" => "a", "ç" => "c", 
+            "é" => "e", "í" => "i", "ñ" => "n", "ó" => "o", "ú" => "u", "à" => "a", "è" => "e", "ì" => "i", "ò" => "o", 
+            "ù" => "u", "ã" => "a", "¿" => "", "?" =>  "", "¡" =>  "", "!" =>  "", ": " => "-"
+        );                
+                
+        return strtr($string, $characters); 
+	}
+}
+
+if (!function_exists("suggestWords")) {
+	function suggestWords($text, $language = SCPHP_LANGUAGE)
+	{
+		$pattern = '/([a-zA-Z]*[ÁÉÍÓÚÑáéíóúñ][a-zA-Z]*)/';
+
+		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
+		
+		$count = count($matches);		
+
+		if ($count > 0) {
+			for ($i = 0; $i < $count; $i++) {
+				if (isset($matches[$i][0]) and isset($matches[$i + 1][0])) {
+					$suggestedWords[stripAccents($matches[$i][0] . $matches[$i + 1][0])] = $matches[$i][0] . $matches[$i + 1][0];
+					$i++;
+				}
+			}
+	
+			$jsonFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_suggested.json";
+			$jsonContent = !file_exists($jsonFile) ? null : file_get_contents($jsonFile);
+			$alreadySuggestedWords = (array) json_decode($jsonContent, true);			
+
+			$jsonContent = json_encode(array_merge($alreadySuggestedWords, $suggestedWords));
+			
+			if (!file_exists($jsonFile)) {
+				file_put_contents($jsonFile, $jsonContent, FILE_APPEND | LOCK_EX);
+			} else {
+				file_put_contents($jsonFile, $jsonContent);
+			}
+		}
+	}
+}
+
+if (!function_exists("removeChars")) {
+	function removeChars($text) 
+	{
+		$text = str_replace('"', "", $text);
+		$text = str_replace("'", "", $text);
+		$text = str_replace(".", "", $text);
+		$text = str_replace(",", " ", $text);
+		$text = str_replace(":", "", $text);
+		$text = str_replace("(", "", $text);
+		$text = str_replace(")", "", $text);
+		$text = str_replace("¿", "", $text);
+		$text = str_replace("?", "", $text);
+		$text = str_replace("[", "", $text);
+		$text = str_replace("]", "", $text);
+		$text = str_replace("{", "", $text);
+		$text = str_replace("}", "", $text);
+		$text = str_replace("-", "", $text);
+		$text = str_replace("\n", " ", $text);
+		$text = str_replace("  ", "", $text);
+		$text = preg_replace('/[0-9]/', '', $text);
+		$text = cleanHTML($text);
+
+		return $text;
+	}
+}
+
+if (!function_exists("cleanHTML")) {
+	function cleanHTML($HTML)
+	{
+		$search = array(
+			'@<script[^>]*?>.*?</script>@si', '@<[\/\!]*?[^<>]*?>@si', '@([\r\n])[\s]+@', '@&(quot|#34);@i', '@&(amp|#38);@i', 
+			'@&(lt|#60);@i', '@&(gt|#62);@i', '@&(nbsp|#160);@i', '@&(iexcl|#161);@i', '@&(cent|#162);@i', '@&(pound|#163);@i', 
+			'@&(copy|#169);@i', '@&#(\d+);@e'
+		);		
+		
+		$replace = array('', '', '\1', '"', '&', '<', '>', ' ', chr(161), chr(162), chr(163), chr(169), 'chr(\1)');		
+		
+		return preg_replace($search, $replace, $HTML);
 	}
 }
