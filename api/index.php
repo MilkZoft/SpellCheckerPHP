@@ -16,9 +16,9 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 		}
 
 		include "../spellchecker.php";
-		die(var_dump($_REQUEST));
+
 		if (isset($_REQUEST["encoded"])) {
-			$text = base64_decode($_REQUEST["text"]);
+			$text = base64_encode($_REQUEST["text"]);
 		} else {
 			$text = $_REQUEST["text"];
 		}
