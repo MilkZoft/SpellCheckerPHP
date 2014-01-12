@@ -19,10 +19,12 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 
 		if (isset($_REQUEST["encode"])) {
 			$text = base64_decode($_REQUEST["text"]);
+
+			die(var_dump($text));
 		} else {
 			$text = $_REQUEST["text"];
 		}
-		
+		die("no");
 		$text = spellChecker($text, $language);
 
 		if (isset($_REQUEST["type"]) and $_REQUEST["type"] == "json") {
