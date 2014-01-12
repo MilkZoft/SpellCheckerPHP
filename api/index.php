@@ -19,6 +19,7 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 
 		if (isset($_REQUEST["encoded"])) {
 			$text = base64_decode($_REQUEST["text"]);
+			die(var_dump($text));
 		} else {
 			$text = $_REQUEST["text"];
 		}
