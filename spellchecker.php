@@ -14,7 +14,6 @@ if (!function_exists("spellChecker")) {
 		$text = fixOrthography($text, $language);
 		$text = fixChars($text);		
 		$text = fixParenthesis($text);
-		$text = fixDots($text);
 		$text = fixWords($text, $language);
 		
 		saveText($wrongText, $text, $language);
