@@ -10,7 +10,6 @@ include "config.php";
 if (!function_exists("spellChecker")) {
 	function spellChecker($wrongText, $language = SCPHP_LANGUAGE) 
 	{				
-		die(var_dump($wrongText));
 		$text = fixCaps($wrongText);
 		$text = fixOrthography($text, $language);
 		$text = fixChars($text);		
@@ -315,8 +314,16 @@ if (!function_exists("removeChars")) {
 if (!function_exists("cleanHTML")) {
 	function cleanHTML($text)
 	{
-		$text = preg_replace('/<([a-z]+)[^>]*>/i', '<\1>', $text); 
-
-		die(var_dump($text));
+		$text = stripslashes($text);
+		
+		$search = array(
+			'@<script[^>]*?>.*?</script>@si', '@<[\/\!]*?[^<>]*?>@si', '@([\r\n])[\s]+@', '@&(quot|#34);@i', '@&(amp|#38);@i', 
+			'@&(lt|#60);@i', '@&(gt|#62);@i', '@&(nbsp|#160);@i', '@&(iexcl|#161);@i', '@&(cent|#162);@i', '@&(pound|#163);@i', 
+			'@&(copy|#169);@i', '@&#(\d+);@e'
+		);		
+		
+		$replace = array('', '', '\1', '"', '&', '<', '>', ' ', chr(161), chr(162), chr(163), chr(169), 'chr(\1)');		
+		
+		return preg_replace($search, $replace, $text);
 	}
 }
