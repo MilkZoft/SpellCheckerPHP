@@ -312,8 +312,8 @@ if (!function_exists("removeChars")) {
 }
 
 if (!function_exists("cleanHTML")) {
-	function cleanHTML($HTML)
+	function cleanHTML($text)
 	{
-		return preg_replace('/<.*?>/', '', $HTML);
+		return strip_tags($text);
 	}
 }
