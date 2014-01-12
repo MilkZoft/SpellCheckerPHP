@@ -80,7 +80,7 @@ if (!function_exists("fixOrthography")) {
 			
 			$query = "SELECT IncorrectWord, CorrectWord FROM sc_spanish_dictionary 
 					  WHERE MATCH (IncorrectWord, CommonMistakes) AGAINST('". stripAccents($words[$i]) ."') LIMIT 1";
-			die(var_dump($query));
+			
 			$result = $db->query($query);
 			
 			if ($result) {
