@@ -304,7 +304,8 @@ if (!function_exists("removeChars")) {
 		$text = str_replace("-", "", $text);
 		$text = str_replace("\n", " ", $text);
 		$text = str_replace("  ", "", $text);
-		$text = str_replace("/ppimg", "", $text);
+		$text = str_replace("AdSky", "", $text);
+		$text = str_replace("       ", " ", $text);
 		$text = preg_replace('/[0-9]/', '', $text);
 
 		return $text;
