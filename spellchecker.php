@@ -91,7 +91,7 @@ if (!function_exists("fixOrthography")) {
 
 					if (($length2 - $length1) <= 1) {
 						$words[$i] = removeChars($words[$i]);
-						die(var_dump($words));
+					
 						$word = (ctype_upper($words[$i]{0})) ? ucfirst($data["CorrectWord"]) : $data["CorrectWord"];
 						
 						$text = preg_replace("/\b". $words[$i] ."\b/", utf8_encode($word), $text);
