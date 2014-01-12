@@ -10,8 +10,8 @@ include "config.php";
 if (!function_exists("spellChecker")) {
 	function spellChecker($wrongText, $language = SCPHP_LANGUAGE) 
 	{				
-		$text = fixCaps($wrongText);
 		$text = fixOrthography($text, $language);
+		$text = fixCaps($wrongText);
 		$text = fixChars($text);		
 		$text = fixParenthesis($text);
 		$text = fixDots($text);
@@ -19,7 +19,7 @@ if (!function_exists("spellChecker")) {
 		
 		saveText($wrongText, $text, $language);
 		
-		return stripslashes(ucfirst($text));
+		return stripslashes($text);
 	}
 }
 
