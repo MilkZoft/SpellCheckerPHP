@@ -314,6 +314,6 @@ if (!function_exists("removeChars")) {
 if (!function_exists("cleanHTML")) {
 	function cleanHTML($HTML)
 	{
-		return preg_replace('/<[^>]*>/', '', $HTML);
+		return preg_replace('/<.*?>/', '', $HTML);
 	}
 }
