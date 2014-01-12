@@ -66,7 +66,6 @@ if (!function_exists("fixOrthography")) {
 
 		header('Content-Type: text/html; charset=UTF-8');
 
-		die(var_dump(removeChars($text)));
 		$text = fixDots($text);
 
 		$words = array_values(array_filter(array_unique(explode(" ", removeChars($text))), function ($word) {
