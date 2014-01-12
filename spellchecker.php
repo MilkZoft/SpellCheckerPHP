@@ -68,7 +68,7 @@ if (!function_exists("fixOrthography")) {
 
 
 		$text = fixDots($text);
-
+		die(var_dump(removeChars($text)));
 		$words = array_values(array_filter(array_unique(explode(" ", removeChars($text))), function ($word) {
 			return strlen(stripAccents($word)) >= 4 and !ctype_upper($word);
 		}));
