@@ -10,8 +10,8 @@ include "config.php";
 if (!function_exists("spellChecker")) {
 	function spellChecker($wrongText, $language = SCPHP_LANGUAGE) 
 	{				
-		$text = fixOrthography($text, $language);
 		$text = fixCaps($wrongText);
+		$text = fixOrthography($text, $language);
 		$text = fixChars($text);		
 		$text = fixParenthesis($text);
 		$text = fixDots($text);
@@ -19,7 +19,7 @@ if (!function_exists("spellChecker")) {
 		
 		saveText($wrongText, $text, $language);
 		
-		return stripslashes($text);
+		return stripslashes(ucfirst($text));
 	}
 }
 
@@ -314,6 +314,14 @@ if (!function_exists("removeChars")) {
 if (!function_exists("cleanHTML")) {
 	function cleanHTML($text)
 	{
-		return strip_tags($text);
+		$search = array('@<script[^>]*?>.*?</script>@si',  // Strip out javascript 
+               '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags 
+               '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly 
+               '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments including CDATA 
+		); 
+
+		$text = preg_replace($search, '', $text);
+
+		die(var_dump($text));
 	}
 }
