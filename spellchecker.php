@@ -10,6 +10,7 @@ include "config.php";
 if (!function_exists("spellChecker")) {
 	function spellChecker($wrongText, $language = SCPHP_LANGUAGE) 
 	{				
+		die(var_dump($wrongText));
 		$text = fixCaps($wrongText);
 		$text = fixOrthography($text, $language);
 		$text = fixChars($text);		
