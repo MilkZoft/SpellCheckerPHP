@@ -287,6 +287,7 @@ if (!function_exists("suggestWords")) {
 if (!function_exists("removeChars")) {
 	function removeChars($text) 
 	{
+		$text = cleanHTML($text);
 		$text = str_replace('"', "", $text);
 		$text = str_replace("'", "", $text);
 		$text = str_replace(".", "", $text);
@@ -305,7 +306,6 @@ if (!function_exists("removeChars")) {
 		$text = str_replace("  ", "", $text);
 		$text = str_replace("/ppimg", "", $text);
 		$text = preg_replace('/[0-9]/', '', $text);
-		$text = cleanHTML($text);
 
 		return $text;
 	}
