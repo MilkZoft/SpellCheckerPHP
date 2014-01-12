@@ -66,7 +66,7 @@ if (!function_exists("fixOrthography")) {
 
 		header('Content-Type: text/html; charset=UTF-8');
 
-		$text = fixDots($text);
+		$text = fixHTML($text);
 
 		$words = array_values(array_filter(array_unique(explode(" ", removeChars($text))), function ($word) {
 			return strlen(stripAccents($word)) >= 4 and !ctype_upper($word);
@@ -185,7 +185,7 @@ if (!function_exists("fixParenthesis")) {
 
 
 if (!function_exists("fixDots")) {
-	function fixDots($text) 
+	function fixHTML($text) 
 	{
 		$text = html_entity_decode($text);
 
@@ -195,6 +195,8 @@ if (!function_exists("fixDots")) {
 		     return strtoupper($matches[0]);
 		}, $text);
 
+		$text = str_replace("<p> </p>", "", $text);
+		$text = str_replace("<p>&nbsp;</p>", "", $text);
 		$text = str_replace(",", ", ", $text);
 		$text = str_replace(" ,", ", ", $text);
 		$text = str_replace(" , ", ", ", $text);
