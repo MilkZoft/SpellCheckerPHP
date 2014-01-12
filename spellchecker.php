@@ -186,14 +186,6 @@ if (!function_exists("fixParenthesis")) {
 if (!function_exists("fixDots")) {
 	function fixHTML($text) 
 	{
-		$text = html_entity_decode($text);
-
-		$text = preg_replace("/\.([0-9A-Za-z]{4,15})/", ". $1", $text);
-		$text = str_replace("www. ", "www.", $text);
-		$text = preg_replace_callback("/\.\s[a-z]/", function ($matches) {
-		     return strtoupper($matches[0]);
-		}, $text);
-
 		$text = str_replace("<p> </p>", "", $text);
 		$text = str_replace("<p>&nbsp;</p>", "", $text);
 		$text = str_replace(",", ", ", $text);
