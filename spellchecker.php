@@ -251,30 +251,32 @@ if (!function_exists("stripAccents")) {
 if (!function_exists("suggestWords")) {
 	function suggestWords($text, $language = SCPHP_LANGUAGE)
 	{
-		$pattern = '/([a-zA-Z]*[ÁÉÍÓÚÑáéíóúñ][a-zA-Z]*)/';
+		if ($text != '') {
+			$pattern = '/([a-zA-Z]*[ÁÉÍÓÚÑáéíóúñ][a-zA-Z]*)/';
 
-		preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
-		
-		$count = count($matches);		
-
-		if ($count > 0) {
-			for ($i = 0; $i < $count; $i++) {
-				if (isset($matches[$i][0]) and isset($matches[$i + 1][0])) {
-					$suggestedWords[stripAccents($matches[$i][0] . $matches[$i + 1][0])] = $matches[$i][0] . $matches[$i + 1][0];
-					$i++;
-				}
-			}
-	
-			$jsonFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_suggested.json";
-			$jsonContent = !file_exists($jsonFile) ? null : file_get_contents($jsonFile);
-			$alreadySuggestedWords = (array) json_decode($jsonContent, true);			
-
-			$jsonContent = json_encode(array_merge($alreadySuggestedWords, $suggestedWords));
+			preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
 			
-			if (!file_exists($jsonFile)) {
-				file_put_contents($jsonFile, $jsonContent, FILE_APPEND | LOCK_EX);
-			} else {
-				file_put_contents($jsonFile, $jsonContent);
+			$count = count($matches);		
+
+			if ($count > 0) {
+				for ($i = 0; $i < $count; $i++) {
+					if (isset($matches[$i][0]) and isset($matches[$i + 1][0])) {
+						$suggestedWords[stripAccents($matches[$i][0] . $matches[$i + 1][0])] = $matches[$i][0] . $matches[$i + 1][0];
+						$i++;
+					}
+				}
+		
+				$jsonFile = SCPHP_PATH . SCPHP_DICTIONARIES_PATH . $language ."_suggested.json";
+				$jsonContent = !file_exists($jsonFile) ? null : file_get_contents($jsonFile);
+				$alreadySuggestedWords = (array) json_decode($jsonContent, true);			
+
+				$jsonContent = json_encode(array_merge($alreadySuggestedWords, $suggestedWords));
+				
+				if (!file_exists($jsonFile)) {
+					file_put_contents($jsonFile, $jsonContent, FILE_APPEND | LOCK_EX);
+				} else {
+					file_put_contents($jsonFile, $jsonContent);
+				}
 			}
 		}
 	}
