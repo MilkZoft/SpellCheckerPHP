@@ -17,12 +17,8 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 
 		include "../spellchecker.php";
 
-		if (isset($_REQUEST["encoded"])) {
-			$text = base64_decode($_REQUEST["text"]);
-		} else {
-			$text = $_REQUEST["text"];
-		}
-		die(var_dump($text));
+		$text = $_REQUEST["text"];		
+
 		$text = spellChecker($text, $language);
 
 		if (isset($_REQUEST["type"]) and $_REQUEST["type"] == "json") {
