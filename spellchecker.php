@@ -314,13 +314,7 @@ if (!function_exists("removeChars")) {
 if (!function_exists("cleanHTML")) {
 	function cleanHTML($text)
 	{
-		$search = array('@<script[^>]*?>.*?</script>@si',  // Strip out javascript 
-               '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags 
-               '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly 
-               '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments including CDATA 
-		); 
-
-		$text = preg_replace($search, '', $text);
+		$text = preg_replace('/<([a-z]+)[^>]*>/i', '<\1>', $text); 
 
 		die(var_dump($text));
 	}
