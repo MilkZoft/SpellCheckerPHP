@@ -66,9 +66,9 @@ if (!function_exists("fixOrthography")) {
 
 		header('Content-Type: text/html; charset=UTF-8');
 
-
-		$text = fixDots($text);
 		die(var_dump(removeChars($text)));
+		$text = fixDots($text);
+
 		$words = array_values(array_filter(array_unique(explode(" ", removeChars($text))), function ($word) {
 			return strlen(stripAccents($word)) >= 4 and !ctype_upper($word);
 		}));
