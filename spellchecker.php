@@ -190,6 +190,7 @@ if (!function_exists("fixDots")) {
 		$text = str_replace(",", ", ", $text);
 		$text = str_replace(" ,", ", ", $text);
 		$text = str_replace(" , ", ", ", $text);
+		$text = str_replace("<p><br></p>", "", $text);
 
 		return $text;
 	}
