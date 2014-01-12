@@ -80,19 +80,21 @@ if (!function_exists("fixOrthography")) {
 			
 			$query = "SELECT IncorrectWord, CorrectWord FROM sc_spanish_dictionary 
 					  WHERE MATCH (IncorrectWord, CommonMistakes) AGAINST('". stripAccents($words[$i]) ."') LIMIT 1";
-			
+			die(var_dump($query));
 			$result = $db->query($query);
 			
-			$data = $result->fetch(PDO::FETCH_ASSOC);
-			
-			if (isset($data["CorrectWord"])) {
-				$length1 = strlen($words[$i]);
-				$length2 = strlen($data["CorrectWord"]);
+			if ($result) {
+				$data = $result->fetch(PDO::FETCH_ASSOC);
+				
+				if (isset($data["CorrectWord"])) {
+					$length1 = strlen($words[$i]);
+					$length2 = strlen($data["CorrectWord"]);
 
-				if (($length2 - $length1) <= 1) {
-					$word = (ctype_upper($words[$i]{0})) ? ucfirst($data["CorrectWord"]) : $data["CorrectWord"];
-					
-					$text = preg_replace("/\b". $words[$i] ."\b/", utf8_encode($word), $text);
+					if (($length2 - $length1) <= 1) {
+						$word = (ctype_upper($words[$i]{0})) ? ucfirst($data["CorrectWord"]) : $data["CorrectWord"];
+						
+						$text = preg_replace("/\b". $words[$i] ."\b/", utf8_encode($word), $text);
+					}
 				}
 			}
 		}
