@@ -324,6 +324,8 @@ if (!function_exists("cleanHTML")) {
 		
 		$replace = array('', '', '\1', '"', '&', '<', '>', ' ', chr(161), chr(162), chr(163), chr(169), 'chr(\1)');		
 		
-		return trim(preg_replace($search, $replace, $text));
+		$text = preg_replace($search, $replace, $text);
+
+		return preg_replace('/\s+/', ' ', $text);
 	}
 }
