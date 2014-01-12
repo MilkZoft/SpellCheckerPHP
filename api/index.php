@@ -17,8 +17,6 @@ if (isset($_REQUEST["text"]) and strlen($_REQUEST["text"]) > 2) {
 
 		include "../spellchecker.php";
 
-		suggestWords($_REQUEST["text"], $language);
-
 		$text = spellChecker($_REQUEST["text"], $language);
 
 		if (isset($_REQUEST["type"]) and $_REQUEST["type"] == "json") {
