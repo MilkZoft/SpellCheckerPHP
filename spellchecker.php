@@ -107,9 +107,6 @@ if (!function_exists("fixChars")) {
 	function fixChars($text)
 	{
 		$text = str_replace("a cerca", "acerca", $text);
-		$text = str_replace("&nbsp; ", " ", $text);
-		$text = str_replace(".&nbsp;", ". ", $text);
-		$text = str_replace(" &nbsp;", " ", $text);
 		$text = str_replace("  ", " ", $text);
 		$text = str_replace(" . ", ". ", $text);
 		$text = str_replace(",", ", ", $text);
@@ -190,7 +187,7 @@ if (!function_exists("fixDots")) {
 		$text = str_replace(",", ", ", $text);
 		$text = str_replace(" ,", ", ", $text);
 		$text = str_replace(" , ", ", ", $text);
-		$text = str_replace("<p><br></p>", "", $text);
+		$text = str_replace("<p>&nbsp;</p>", "", $text);
 
 		return $text;
 	}
